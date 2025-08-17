@@ -61,18 +61,35 @@ function filterQuotes() {
 }
 
 // ================================
-// Add new quote
+// Add new quote + post to server
 // ================================
-function createAddQuoteForm() {
+async function createAddQuoteForm() {
   const text = document.getElementById("newQuoteText").value.trim();
   const category = document.getElementById("newQuoteCategory").value.trim();
 
   if (text && category) {
-    quotes.push({ text, category });
+    const newQuote = { text, category };
+
+    // Add locally
+    quotes.push(newQuote);
     localStorage.setItem("quotes", JSON.stringify(quotes));
     populateCategories();
     displayRandomQuote();
-    notifyUser("New quote added!");
+
+    // Post to mock server (simulation)
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newQuote)
+      });
+      const result = await response.json();
+      console.log("Posted to server:", result);
+      notifyUser("New quote added & synced with server!");
+    } catch (error) {
+      console.error("Error posting to server:", error);
+      notifyUser("Quote saved locally (server sync failed).");
+    }
   }
 }
 
