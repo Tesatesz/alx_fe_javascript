@@ -1,11 +1,12 @@
 // === Dynamic Quote Generator === //
 
-// Load quotes from localStorage OR use defaults
+// Load quotes from localStorage if available, otherwise use defaults
 let quotes = JSON.parse(localStorage.getItem("quotes")) || [
   { text: "The best way to get started is to quit talking and begin doing.", category: "Motivation" },
   { text: "Life is what happens when you’re busy making other plans.", category: "Life" },
   { text: "Success is not the key to happiness. Happiness is the key to success.", category: "Success" }
 ];
+
 
 // Get DOM elements
 const quoteDisplay = document.getElementById("quoteDisplay");
