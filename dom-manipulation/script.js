@@ -24,13 +24,13 @@ function showRandomQuote() {
     : quotes.filter(quote => quote.category.toLowerCase() === selectedCategory.toLowerCase());
 
   if (filteredQuotes.length === 0) {
-    quoteDisplay.innerText = "No quotes found in this category.";
+    quoteDisplay.innerHTML = "<em>No quotes found in this category.</em>";
     return;
   }
 
   // Pick a random quote
   let randomIndex = Math.floor(Math.random() * filteredQuotes.length);
-  quoteDisplay.innerText = `"${filteredQuotes[randomIndex].text}" — ${filteredQuotes[randomIndex].category}`;
+  quoteDisplay.innerHTML = `"${filteredQuotes[randomIndex].text}" — <strong>${filteredQuotes[randomIndex].category}</strong>`;
 }
 
 /**
